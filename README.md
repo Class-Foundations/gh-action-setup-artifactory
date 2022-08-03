@@ -1,4 +1,4 @@
-[![.github/workflows/cd.yaml](https://github.com/blackboard-innersource/gh-action-setup-artifactory/actions/workflows/cd.yaml/badge.svg)](https://github.com/blackboard-innersource/gh-action-setup-artifactory/actions/workflows/cd.yaml)
+[![.github/workflows/cd.yaml](https://github.com/Class-Foundations/gh-action-setup-artifactory/actions/workflows/cd.yaml/badge.svg)](https://github.com/Class-Foundations/gh-action-setup-artifactory/actions/workflows/cd.yaml)
 
 # GitHub Action: Setup Artifactory
 
@@ -13,7 +13,7 @@ Example for configuring both `pip` and `npm`:
 
 ```yaml
       - name: Setup Artifactory
-        uses: blackboard-innersource/gh-action-setup-artifactory@v1
+        uses: Class-Foundations/gh-action-setup-artifactory@v1
         env:
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
@@ -25,7 +25,7 @@ Example for configuring only `pip`:
 
 ```yaml
       - name: Setup Artifactory
-        uses: blackboard-innersource/gh-action-setup-artifactory@v1
+        uses: Class-Foundations/gh-action-setup-artifactory@v1
         env:
           ARTIFACTORY_SETUP_NPM: false
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
@@ -37,7 +37,7 @@ Example for configuring only `npm`:
 
 ```yaml
       - name: Setup Artifactory
-        uses: blackboard-innersource/gh-action-setup-artifactory@v1
+        uses: Class-Foundations/gh-action-setup-artifactory@v1
         env:
           ARTIFACTORY_SETUP_PIP: false
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
@@ -59,10 +59,10 @@ export ARTIFACTORY_TOKEN="token"
 # ...etc
 
 # Download this project
-git clone --quiet --depth 1 https://github.com/blackboard-innersource/gh-action-setup-artifactory.git
+git clone --quiet --depth 1 https://github.com/Class-Foundations/gh-action-setup-artifactory.git
 
 # Or using a tag
-git clone --quiet --depth 1 --branch v1 https://github.com/blackboard-innersource/gh-action-setup-artifactory.git
+git clone --quiet --depth 1 --branch v1 https://github.com/Class-Foundations/gh-action-setup-artifactory.git
 
 # Same entry point as the GitHub action 
 ./gh-action-setup-artifactory/entry.sh
