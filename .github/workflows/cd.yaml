@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Unit tests
         run: make
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run action
         uses: ./
@@ -45,12 +45,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1.16
 
@@ -68,7 +68,7 @@ jobs:
       - name: Version
         id: version
         if: steps.tag.outputs.make == '1'
-        uses: Class-Foundations/gh-action-version-cat@v2
+        uses: Class-Foundations/gh-action-version-cat@v3
 
       - name: Create GitHub release
         if: steps.tag.outputs.make == '1'
@@ -81,7 +81,7 @@ jobs:
 
       - name: Checkout ${{ steps.version.outputs.version }}
         if: steps.tag.outputs.make == '1'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ steps.version.outputs.version }}
           fetch-depth: 0
