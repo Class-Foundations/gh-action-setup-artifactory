@@ -1,3 +1,5 @@
+name: CD Workflow
+
 on:
   push:
     branches:
@@ -5,6 +7,12 @@ on:
   pull_request:
     branches:
       - main
+
+env:
+  GIT_AUTHOR_NAME: github-actions[bot]
+  GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+  GIT_COMMITTER_NAME: GitHub
+  GIT_COMMITTER_EMAIL: noreply@github.com
 
 jobs:
   test:
@@ -61,8 +69,8 @@ jobs:
           next=$(svu next --pattern 'v*.*.*')
           echo "current: $(svu current)"
           echo "next:    $next"
-          echo "::set-output name=make::$(if [ "$next" = $(svu current) ]; then echo "0"; else echo "1"; fi)"
-          echo "::set-output name=next::$next"
+          echo "make=$(if [ "$next" = $(svu current) ]; then echo "0"; else echo "1"; fi)" >> $GITHUB_OUTPUT
+          echo "next=$next" >> $GITHUB_OUTPUT
           echo ${next#"v"} > VERSION
 
       - name: Version
@@ -86,8 +94,9 @@ jobs:
           ref: ${{ steps.version.outputs.version }}
           fetch-depth: 0
 
+      # https://github.com/actions/toolkit/blob/master/docs/action-versioning.md
       - name: Tag and Push v${{ steps.version.outputs.major }}
         if: steps.tag.outputs.make == '1'
         run: |
-          git tag -f v${{ steps.version.outputs.major }}
-          git push -f origin v${{ steps.version.outputs.major }}
+          git tag -fa v${{ steps.version.outputs.major }} -m "Update v${{ steps.version.outputs.major }} tag"
+          git push origin v${{ steps.version.outputs.major }} --force

@@ -1,6 +1,6 @@
-[![.github/workflows/cd.yaml](https://github.com/Class-Foundations/gh-action-setup-artifactory/actions/workflows/cd.yaml/badge.svg)](https://github.com/Class-Foundations/gh-action-setup-artifactory/actions/workflows/cd.yaml)
-
 # GitHub Action: Setup Artifactory
+
+[![CD Workflow](https://github.com/Class-Foundations/gh-action-setup-artifactory/actions/workflows/cd.yaml/badge.svg)](https://github.com/Class-Foundations/gh-action-setup-artifactory/actions/workflows/cd.yaml)
 
 Configures package managers to authenticate to Artifactory.
 
