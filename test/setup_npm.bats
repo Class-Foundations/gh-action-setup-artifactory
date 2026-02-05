@@ -33,7 +33,6 @@ function teardown {
 registry=https://example.com/test_registry/
 //example.com/test_registry/:_password=dGVzdF90b2tlbg==
 //example.com/test_registry/:username=test_username
-//example.com/test_registry/:always-auth=true
 EOF
 
 }
@@ -57,7 +56,6 @@ EOF
 @wakka:registry=https://example.com/test_registry/
 //example.com/test_registry/:_password=dGVzdF90b2tlbg==
 //example.com/test_registry/:username=test_username
-//example.com/test_registry/:always-auth=true
 EOF
 
 }

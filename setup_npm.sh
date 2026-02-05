@@ -61,7 +61,6 @@ setup_npm() {
 $registry
 //${configKey}:_password=$(encode "$ARTIFACTORY_TOKEN")
 //${configKey}:username=$ARTIFACTORY_USERNAME
-//${configKey}:always-auth=true
 
 EOF
 
