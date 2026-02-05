@@ -29,7 +29,6 @@ setup_npm() {
     return 0
   fi
 
-  require_env "ARTIFACTORY_USERNAME" "$ARTIFACTORY_USERNAME" || return 1
   require_env "ARTIFACTORY_TOKEN" "$ARTIFACTORY_TOKEN" || return 1
   require_env "ARTIFACTORY_NPM_REGISTRY" "$ARTIFACTORY_NPM_REGISTRY" || return 1
 
@@ -59,9 +58,7 @@ setup_npm() {
 
   cat > "$npmrc" << EOF
 $registry
-//${configKey}:_password=$(encode "$ARTIFACTORY_TOKEN")
-//${configKey}:username=$ARTIFACTORY_USERNAME
-//${configKey}:always-auth=true
+//${configKey}:_authToken=$ARTIFACTORY_TOKEN
 
 EOF
 
