@@ -19,7 +19,6 @@ function teardown {
 # shellcheck disable=SC2034
 @test "setup_npm can configure npm" {
   HOME="$TMPDIR"
-  ARTIFACTORY_USERNAME="test_username"
   ARTIFACTORY_TOKEN="test_token"
   ARTIFACTORY_NPM_REGISTRY="https://example.com/test_registry/"
 
@@ -31,8 +30,7 @@ function teardown {
   assert_success
   assert_output - <<EOF
 registry=https://example.com/test_registry/
-//example.com/test_registry/:_password=dGVzdF90b2tlbg==
-//example.com/test_registry/:username=test_username
+//example.com/test_registry/:_authToken=test_token
 EOF
 
 }
@@ -40,7 +38,6 @@ EOF
 # shellcheck disable=SC2034
 @test "setup_npm can configure npm with scopes" {
   HOME="$TMPDIR"
-  ARTIFACTORY_USERNAME="test_username"
   ARTIFACTORY_TOKEN="test_token"
   ARTIFACTORY_NPM_REGISTRY="https://example.com/test_registry/"
   ARTIFACTORY_NPM_SCOPES="@acme,@wakka"
@@ -54,8 +51,7 @@ EOF
   assert_output - <<EOF
 @acme:registry=https://example.com/test_registry/
 @wakka:registry=https://example.com/test_registry/
-//example.com/test_registry/:_password=dGVzdF90b2tlbg==
-//example.com/test_registry/:username=test_username
+//example.com/test_registry/:_authToken=test_token
 EOF
 
 }
@@ -78,7 +74,7 @@ EOF
   run setup_npm
   assert_failure
   assert [ ! -f "$TMPDIR/.npmrc" ]
-  assert_output "Missing env var 'ARTIFACTORY_USERNAME'"
+  assert_output "Missing env var 'ARTIFACTORY_TOKEN'"
 }
 
 # base64 on Linux wraps at 76 characters

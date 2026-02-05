@@ -15,8 +15,8 @@ Example for configuring all - `pip`, `npm/yarn1` and `yarn2+`:
       - name: Setup Artifactory
         uses: Class-Foundations/gh-action-setup-artifactory@v2
         env:
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
+          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}  # Required for pip and yarn
+          ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}        # JFrog Access Token
           ARTIFACTORY_PYPI_INDEX: ${{ secrets.ARTIFACTORY_PYPI_INDEX }}
           ARTIFACTORY_NPM_REGISTRY: ${{ secrets.ARTIFACTORY_NPM_REGISTRY }}
 ```
@@ -42,10 +42,11 @@ Example for configuring only `npm/yarn1`:
         env:
           ARTIFACTORY_SETUP_PIP: false
           ARTIFACTORY_YARN_SETUP: false
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
           ARTIFACTORY_NPM_REGISTRY: ${{ secrets.ARTIFACTORY_NPM_REGISTRY }}
 ```
+
+> **Note:** `ARTIFACTORY_TOKEN` should be a JFrog Access Token for npm authentication.
 
 Example for configuring only `yarn2+`:
 
@@ -60,6 +61,7 @@ Example for configuring only `yarn2+`:
 ```
 
 Additional environment variables:
+
 - `ARTIFACTORY_NPM_SCOPES` adds a scope to the NPM/yarn1 credential setup. Set multiple scopes with: `"@scope1,@scope2"`
   - DO NOT USE for yarn2+ - both repository and scopes should be configured in project's .yarnrc.yml file
 
