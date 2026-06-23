@@ -76,11 +76,13 @@ jobs:
         run: |
           go install github.com/caarlos0/svu@v1.5.0
           next=$(svu next --pattern 'v*.*.*')
-          echo "current: $(svu current)"
+          current=$(svu current --pattern 'v*.*.*')
+          echo "current: $current"
           echo "next:    $next"
-          echo "make=$(if [ "$next" = $(svu current) ]; then echo "0"; else echo "1"; fi)" >> $GITHUB_OUTPUT
-          echo "next=$next" >> $GITHUB_OUTPUT
-          echo ${next#"v"} > VERSION
+          if [ "$next" = "$current" ]; then make=0; else make=1; fi
+          echo "make=$make" >> "$GITHUB_OUTPUT"
+          echo "next=$next" >> "$GITHUB_OUTPUT"
+          echo "${next#v}" > VERSION
 
       - name: Version
         id: version
