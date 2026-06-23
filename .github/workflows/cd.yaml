@@ -79,9 +79,10 @@ jobs:
           current=$(svu current --pattern 'v*.*.*')
           echo "current: $current"
           echo "next:    $next"
-          echo "make=$(if [ "$next" = "$current" ]; then echo "0"; else echo "1"; fi)" >> $GITHUB_OUTPUT
-          echo "next=$next" >> $GITHUB_OUTPUT
-          echo ${next#"v"} > VERSION
+          if [ "$next" = "$current" ]; then make=0; else make=1; fi
+          echo "make=$make" >> "$GITHUB_OUTPUT"
+          echo "next=$next" >> "$GITHUB_OUTPUT"
+          echo "${next#v}" > VERSION
 
       - name: Version
         id: version
